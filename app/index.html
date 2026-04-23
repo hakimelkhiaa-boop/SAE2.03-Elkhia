@@ -10,11 +10,24 @@
   <body>
     <header id="header"></header>
 
-    <section id="content"></section>
+    <section id="section1"></section>
+
+    <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <symbol id="icon-movie" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16.956 0H3.044A3.044 3.044 0 0 0 0 3.044v13.912A3.044 3.044 0 0 0 3.044 20h13.912A3.044 3.044 0 0 0 20 16.956V3.044A3.044 3.044 0 0 0 16.956 0ZM4 9H2V7h2v2Zm-2 2h2v2H2v-2Zm16-2h-2V7h2v2Zm-2 2h2v2h-2v-2Zm2-8.26V4h-2V2h1.26a.74.74 0 0 1 .74.74ZM2.74 2H4v2H2V2.74A.74.74 0 0 1 2.74 2ZM2 17.26V16h2v2H2.74a.74.74 0 0 1-.74-.74Zm16 0a.74.74 0 0 1-.74.74H16v-2h2v1.26Z" fill="currentColor"></path>
+      </symbol>
+      <symbol id="icon-bookmark2" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10.9816 1L11 13L6 9L1 13V1.036L10.9816 1Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="icon-play" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15 0C6.713 0 0 6.713 0 15c0 8.288 6.713 15 15 15 8.288 0 15-6.712 15-15 0-8.287-6.712-15-15-15Zm-3 21V8l9 6.5-9 6.5Z" fill="#FFF"></path>
+      </symbol>
+    </svg>
 
     <script type="module">
       import { NavBar } from "./component/NavBar/script.js";
-
+      import { section1 as section1Component } from "./component/section1/script.js";
+      
       // Controleur
       // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
       // Une fois l'application terminée, on pourrait remettre let C.
@@ -28,6 +41,48 @@
 
       C.start = function () {
         V.renderNavBar("C.handlerAbout()");
+        C.loadMovies();
+      };
+
+      C.loadMovies = function () {
+        fetch("../server/script.php?todo=readmovies")
+          .then(response => response.json())
+          .then(films => {
+            let formattedFilms = [];
+            for (let film of films) {
+              let type;
+              if (film.id_category === 1) {
+                type = "Action";
+              } else if (film.id_category === 2) {
+                type = "Comédie";
+              } else if (film.id_category === 3) {
+                type = "Drame";
+              } else if (film.id_category === 4) {
+                type = "Science-fiction";
+              } else if (film.id_category === 5) {
+                type = "Animation";
+              } else if (film.id_category === 6) {
+                type = "Thriller";
+              } else if (film.id_category === 7) {
+                type = "Horreur";
+              } else if (film.id_category === 8) {
+                type = "Aventure";
+              } else if (film.id_category === 9) {
+                type = "Fantastie";
+              } else if (film.id_category === 10) {
+                type = "Documentaire";
+              } else {
+                type = "Non classé";
+              }
+              formattedFilms.push({
+                date: film.year,
+                type: type,
+                title: film.name,
+                image: film.image
+              });
+            }
+            V.rendersection1(formattedFilms);
+          });
       };
 
       // Vue (contient tout ce qui est relatif à l'affichage)
@@ -43,6 +98,11 @@
       V.renderNavBar = function (hAbout) {
         let header = document.querySelector("#header");
         header.innerHTML = NavBar.format(hAbout);
+      };
+
+      V.rendersection1 = function (films) {
+        let section1 = document.querySelector("#section1");
+        section1.innerHTML = section1Component.render(films);
       };
 
       C.start(); // Démarre l'application
