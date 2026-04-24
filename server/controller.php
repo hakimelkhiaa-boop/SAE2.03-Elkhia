@@ -26,7 +26,6 @@ function readMoviesController(){
         $movies = getAllMovies();
         return $movies;
     } catch (Exception $e) {
-        // En cas d'erreur (connexion BDD, etc.), retourner false
         return false;
     }
 }

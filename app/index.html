@@ -48,39 +48,21 @@
         fetch("../server/script.php?todo=readmovies")
           .then(response => response.json())
           .then(films => {
-            let formattedFilms = [];
-            for (let film of films) {
-              let type;
-              if (film.id_category === 1) {
-                type = "Action";
-              } else if (film.id_category === 2) {
-                type = "Comédie";
-              } else if (film.id_category === 3) {
-                type = "Drame";
-              } else if (film.id_category === 4) {
-                type = "Science-fiction";
-              } else if (film.id_category === 5) {
-                type = "Animation";
-              } else if (film.id_category === 6) {
-                type = "Thriller";
-              } else if (film.id_category === 7) {
-                type = "Horreur";
-              } else if (film.id_category === 8) {
-                type = "Aventure";
-              } else if (film.id_category === 9) {
-                type = "Fantastie";
-              } else if (film.id_category === 10) {
-                type = "Documentaire";
-              } else {
-                type = "Non classé";
-              }
-              formattedFilms.push({
-                date: film.year,
-                type: type,
-                title: film.name,
-                image: film.image
-              });
-            }
+            const formattedFilms = films.map(film => ({
+              date: film.year,
+              type: film.id_category === 1 ? "Action" :
+                    film.id_category === 2 ? "Comédie" :
+                    film.id_category === 3 ? "Drame" :
+                    film.id_category === 4 ? "Science-fiction" :
+                    film.id_category === 5 ? "Animation" :
+                    film.id_category === 6 ? "Thriller" :
+                    film.id_category === 7 ? "Horreur" :
+                    film.id_category === 8 ? "Aventure" :
+                    film.id_category === 9 ? "Fantastie" :
+                    film.id_category === 10 ? "Documentaire" : "Non classé",
+              title: film.name,
+              image: film.image
+            }));
             V.rendersection1(formattedFilms);
           });
       };

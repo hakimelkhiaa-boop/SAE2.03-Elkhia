@@ -1,0 +1,60 @@
+<form id="movie-form" class="movie-form">
+  <h2>Ajouter un film</h2>
+  
+  <div class="form-group">
+    <label for="title">Titre *</label>
+    <input type="text" id="title" name="title" required />
+  </div>
+
+  <div class="form-group">
+    <label for="director">Réalisateur *</label>
+    <input type="text" id="director" name="director" required />
+  </div>
+
+  <div class="form-group">
+    <label for="year">Année *</label>
+    <input type="number" id="year" name="year" min="1888" max="2100" required />
+  </div>
+
+  <div class="form-group">
+    <label for="duration">Durée (minutes) *</label>
+    <input type="number" id="duration" name="duration" min="1" required />
+  </div>
+
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea id="description" name="description" rows="4"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="category">Catégorie *</label>
+    <select id="category" name="category" required>
+      <option value="">Sélectionner une catégorie</option>
+      <option value="Action">Action</option>
+      <option value="Comédie">Comédie</option>
+      <option value="Drame">Drame</option>
+      <option value="Science-fiction">Science-fiction</option>
+      <option value="Horreur">Horreur</option>
+      <option value="Thriller">Thriller</option>
+      <option value="Animation">Animation</option>
+      <option value="Documentaire">Documentaire</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="image">Nom du fichier image</label>
+    <input type="text" id="image" name="image" placeholder="image.jpg" />
+  </div>
+
+  <div class="form-group">
+    <label for="trailer">URL du trailer</label>
+    <input type="url" id="trailer" name="trailer" placeholder="https://..." />
+  </div>
+
+  <div class="form-group">
+    <label for="age">Restrictions d'âge</label>
+    <input type="number" id="age" name="age" min="0" max="18" placeholder="0-18" />
+  </div>
+
+  <button type="submit" class="btn-submit">Ajouter le film</button>
+</form>
