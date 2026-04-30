@@ -18,16 +18,33 @@ define("DBNAME", "elkhia1");
 define("DBLOGIN", "elkhia1");
 define("DBPWD", "elkhia1");
 
-
 function getAllMovies(){
-    // Connexion à la base de données
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-    // Requête SQL simple pour récupérer les films
     $sql = "SELECT id, name, year, image, id_category FROM Movie";
-    // Prépare et exécute la requête
     $stmt = $cnx->prepare($sql);
     $stmt->execute();
-    // Récupère les résultats
-    $res = $stmt->fetchAll(PDO::FETCH_OBJ);
-    return $res;
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
+}
+
+function addMovie($name, $director, $year, $length, $description, $id_category, $image, $trailer, $min_age){
+    try {
+        $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+        $sql = "INSERT INTO Movie (name, director, year, length, description, id_category, image, trailer, min_age)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $cnx->prepare($sql);
+        return $stmt->execute([$name, $director, $year, $length, $description, $id_category, $image, $trailer, $min_age]);
+    } catch (Exception $e) {
+        return false;
+    }
+}
+
+
+function getMovieDetail($id) {
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+
+    $sql = "SELECT * FROM Movie WHERE id = ?";
+    $stmt = $cnx->prepare($sql);
+    $stmt->execute([$id]);
+
+    return $stmt->fetch(PDO::FETCH_OBJ);
 }

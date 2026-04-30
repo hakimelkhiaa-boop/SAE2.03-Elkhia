@@ -20,12 +20,75 @@
  */
 require("model.php");
 
-
 function readMoviesController(){
     try {
-        $movies = getAllMovies();
-        return $movies;
+        return getAllMovies();
     } catch (Exception $e) {
         return false;
     }
+}
+
+function readMovieDetail() {
+    if (!isset($_GET['id'])) {
+        return ["error" => "ID manquant"];
+    }
+
+    $id = $_GET['id'];
+    $film = getMovieDetail($id);
+
+    if (!$film) {
+        return ["error" => "Film introuvable"];
+    }
+
+    return $film;
+}
+
+function addMovieController() {
+
+    // Champs attendus
+    $fields = ["title","director","year","duration","description","category","image","trailer","age"];
+
+    foreach ($fields as $f) {
+        if (!isset($_POST[$f])) {
+            return ["error" => "Champ manquant : $f"];
+        }
+    }
+
+    // Récupération des données
+    $title       = $_POST["title"];
+    $director    = $_POST["director"];
+    $year        = $_POST["year"];
+    $length      = $_POST["duration"];
+    $description = $_POST["description"];
+    $categoryTxt = $_POST["category"];
+    $image       = $_POST["image"];
+    $trailer     = $_POST["trailer"];
+    $min_age     = $_POST["age"];
+
+    // Conversion catégorie texte → ID
+    $categories = [
+        "Action" => 1,
+        "Comédie" => 2,
+        "Drame" => 3,
+        "Science-fiction" => 4,
+        "Horreur" => 5,
+        "Thriller" => 6,
+        "Animation" => 7,
+        "Documentaire" => 8
+    ];
+
+    if (!isset($categories[$categoryTxt])) {
+        return ["error" => "Catégorie inconnue"];
+    }
+
+    $id_category = $categories[$categoryTxt];
+
+    // Appel au modèle
+    $ok = addMovie($title, $director, $year, $length, $description, $id_category, $image, $trailer, $min_age);
+
+    if (!$ok) {
+        return ["error" => "Erreur lors de l'insertion"];
+    }
+
+    return ["success" => "Film ajouté avec succès !"];
 }

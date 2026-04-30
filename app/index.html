@@ -12,6 +12,8 @@
 
     <section id="section1"></section>
 
+    <section id="app"></section>
+
     <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
       <symbol id="icon-movie" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
         <path d="M16.956 0H3.044A3.044 3.044 0 0 0 0 3.044v13.912A3.044 3.044 0 0 0 3.044 20h13.912A3.044 3.044 0 0 0 20 16.956V3.044A3.044 3.044 0 0 0 16.956 0ZM4 9H2V7h2v2Zm-2 2h2v2H2v-2Zm16-2h-2V7h2v2Zm-2 2h2v2h-2v-2Zm2-8.26V4h-2V2h1.26a.74.74 0 0 1 .74.74ZM2.74 2H4v2H2V2.74A.74.74 0 0 1 2.74 2ZM2 17.26V16h2v2H2.74a.74.74 0 0 1-.74-.74Zm16 0a.74.74 0 0 1-.74.74H16v-2h2v1.26Z" fill="currentColor"></path>
@@ -26,7 +28,10 @@
 
     <script type="module">
       import { NavBar } from "./component/NavBar/script.js";
-      import { section1 as section1Component } from "./component/section1/script.js";
+      import { MovieList } from "./component/MovieList/script.js";
+      import { DataMovie } from "./data/dataMovie.js";
+      import { MovieDetail } from "./component/MovieDetail/script.js";
+
       
       // Controleur
       // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
@@ -35,37 +40,33 @@
 
       C.handlerAbout = function () {
         alert(
-          "Ceci est une base de projet pour la SAE2.03 édition 2025. Bonne chance !"
+          "Ceci est un projet pour la SAE2.03 édition 2026."
         );
       };
 
-      C.start = function () {
-        V.renderNavBar("C.handlerAbout()");
-        C.loadMovies();
+
+
+      C.handlerDetail = async function(id){
+          console.log("ID cliqué :", id);
+          let response = await fetch(`../server/script.php?todo=readMovieDetail&id=${id}`);
+          let film = await response.json();
+          console.log("Film reçu :", film);
+          if(film.error){
+              alert("Film introuvable");
+              return;
+          }
+
+          let html = MovieDetail.format(film);
+          console.log("HTML généré :", html);
+          document.querySelector("#section1").innerHTML = html;
+      }
+
+      C.start = async function () {
+        V.renderNavBar( "C.handlerHome()", "C.handlerAbout()" );
+        let data = await DataMovie.requestMovies();
+        V.rendersection1(data); // Affiche une section vide au démarrage, les films seront chargés ensuite
       };
 
-      C.loadMovies = function () {
-        fetch("../server/script.php?todo=readmovies")
-          .then(response => response.json())
-          .then(films => {
-            const formattedFilms = films.map(film => ({
-              date: film.year,
-              type: film.id_category === 1 ? "Action" :
-                    film.id_category === 2 ? "Comédie" :
-                    film.id_category === 3 ? "Drame" :
-                    film.id_category === 4 ? "Science-fiction" :
-                    film.id_category === 5 ? "Animation" :
-                    film.id_category === 6 ? "Thriller" :
-                    film.id_category === 7 ? "Horreur" :
-                    film.id_category === 8 ? "Aventure" :
-                    film.id_category === 9 ? "Fantastie" :
-                    film.id_category === 10 ? "Documentaire" : "Non classé",
-              title: film.name,
-              image: film.image
-            }));
-            V.rendersection1(formattedFilms);
-          });
-      };
 
       // Vue (contient tout ce qui est relatif à l'affichage)
       window.V = {};
@@ -77,14 +78,19 @@
        * Elle sélectionne l'élément HTML avec l'ID "header" et y insère le contenu
        * formaté par le composant NavBar.
        */
-      V.renderNavBar = function (hAbout) {
+      V.renderNavBar = function (hHome, hAbout) {
         let header = document.querySelector("#header");
-        header.innerHTML = NavBar.format(hAbout);
+        header.innerHTML = NavBar.format(hAbout, hHome);
       };
 
-      V.rendersection1 = function (films) {
+      C.handlerHome = async function () {
+        let data = await DataMovie.requestMovies();
+        V.rendersection1(data);
+      };
+
+      V.rendersection1 = function (data) {
         let section1 = document.querySelector("#section1");
-        section1.innerHTML = section1Component.render(films);
+        section1.innerHTML = MovieList.formatMany(data);
       };
 
       C.start(); // Démarre l'application

@@ -1,0 +1,52 @@
+.detail {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  color: var(--color-fg);
+}
+
+.detail__image img {
+  width: auto;
+  border-radius: 0.5rem;
+}
+
+.detail__content {
+  max-width: 700px;
+}
+
+.detail__title {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.detail__description {
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.detail__info {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
+.detail__info li {
+  margin-bottom: 0.5rem;
+}
+
+.detail__trailer iframe {
+  width: 100%;
+  height: 350px;
+  border-radius: 0.5rem;
+}
+
+@media (max-width: 800px) {
+  .detail {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .detail__image img {
+    width: 80%;
+  }
+}

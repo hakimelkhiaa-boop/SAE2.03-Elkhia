@@ -13,10 +13,6 @@ body {
     --_icon-taille: 4rem;
   }
 
-  &.icon--movie{
-    --_icon-taille:1rem;    
-  }
-
   &.icon--bookmark{
     
     background-color: rgba(0, 0, 0, 0.5);
@@ -93,16 +89,10 @@ button{
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  grid-template-columns: repeat(4, minmax(15rem, 30rem));
   gap: 1rem;
 }
 
-.card__text-container {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  justify-content: center;
-}
 
 .grid-text {
   display: flex;

@@ -1,31 +1,59 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <title>SAE2.03 ADMIN</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/base.css" />
-  </head>
-  <body>
-    <section id="log"></section>
 
-    <script type="module">
-      import { Log } from "./component/Log/script.js";
+<head>
+  <title>SAE2.03 ADMIN</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./css/base.css" />
+</head>
 
-      window.C = {};
+<body>
+  <section id="log"></section>
+  <section id="form"></section>
 
-      C.start = function () {
-        V.renderLog("Démarrage de l'application");
-      };
+  <script type="module">
+    import { Log } from "./component/Log/script.js";
+    import { MovieForm } from "./component/MovieForm/script.js";
+    import { dataMovie } from "./data/dataMovie.js";
 
-      window.V = {};
+    window.C = {};
 
-      V.renderLog = function (txt) {
-        let content = document.querySelector("#log");
-        content.innerHTML = Log.format(txt);
-      };
+   C.handlerAjout = async function () {
 
-      C.start();
-    </script>
-  </body>
+    let form = document.querySelector('.movie-form');
+
+    let fd = new FormData(form);
+
+    let res = await dataMovie.addMovie(fd);
+
+    V.renderLog(JSON.stringify(res));
+}
+
+
+    C.start = function () {
+      V.renderLog("Démarrage de l'application");
+      V.renderMovieForm();
+      
+    };
+
+    window.V = {};
+
+    V.renderLog = function (txt) {
+      let content = document.querySelector("#log");
+      content.innerHTML = Log.format(txt);
+    };
+
+    V.renderMovie = function (handler) {
+      let content = document.querySelector('#addMovie');
+      content.innerHTML = MovieForm.format(handler);
+    };
+    V.renderMovieForm = function () {
+      let formulaire = document.querySelector("#form");
+      formulaire.innerHTML = MovieForm.format("C.handlerAjout()");
+    }
+    C.start();
+  </script>
+</body>
+
 </html>

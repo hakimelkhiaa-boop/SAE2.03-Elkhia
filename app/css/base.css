@@ -5,4 +5,5 @@
 @import "./utilities.css" layer(utilities);
 
 @import "../component/NavBar/style.css" layer(components);
-@import "../component/section1/style.css" layer(components);
+@import "../component/MovieList/style.css" layer(components);
+@import "../component/MovieDetail/style.css" layer(components);

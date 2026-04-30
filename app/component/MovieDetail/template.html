@@ -1,0 +1,26 @@
+<div class="detail">
+  <div class="detail__image">
+    <img src="../server/images/{{image}}" alt="Affiche de {{name}}">
+  </div>
+
+  <div class="detail__content">
+    <h1 class="detail__title">{{name}}</h1>
+
+    <p class="detail__description">{{description}}</p>
+
+    <ul class="detail__info">
+      <li><strong>Réalisateur :</strong> {{director}}</li>
+      <li><strong>Année :</strong> {{year}}</li>
+      <li><strong>Catégorie :</strong> {{id_category}}</li>
+      <li><strong>Âge :</strong> {{min_age}}+</li>
+    </ul>
+
+    <div class="detail__trailer">
+      <iframe 
+        src="{{trailer}}" 
+        frameborder="0" 
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+</div>
