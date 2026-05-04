@@ -3,12 +3,15 @@ let template = await templateFile.text();
 
 const categories = {
     1: "Action",
-    2: "Aventure",
-    3: "Comédie",
+    2: "Comédie",
+    3: "Drame",
     4: "Science-fiction",
     5: "Animation",
-    6: "Drame",
-    7: "Horreur"
+    6: "thriller",
+    7: "Horreur",
+    8: "Aventure",
+    9: "Fantaisie",
+    10: "Documentaire"
 };
 
 

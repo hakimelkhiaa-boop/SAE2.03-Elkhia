@@ -9,7 +9,7 @@
 
   <body>
     <header id="header"></header>
-
+    <section id="section0"></section>
     <section id="section1"></section>
 
     <section id="app"></section>
@@ -32,6 +32,18 @@
       import { DataMovie } from "./data/dataMovie.js";
       import { MovieDetail } from "./component/MovieDetail/script.js";
 
+      const categories = {
+    1: "Action",
+    2: "Comédie",
+    3: "Drame",
+    4: "Science-fiction",
+    5: "Animation",
+    6: "thriller",
+    7: "Horreur",
+    8: "Aventure",
+    9: "Fantaisie",
+    10: "Documentaire"
+};
       
       // Controleur
       // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
@@ -59,6 +71,7 @@
           let html = MovieDetail.format(film);
           console.log("HTML généré :", html);
           document.querySelector("#section1").innerHTML = html;
+          window.scrollTo(0, 0); 
       }
 
       C.start = async function () {
@@ -88,10 +101,40 @@
         V.rendersection1(data);
       };
 
+      // V.rendersection1 = function (data) {
+      //   let section1 = document.querySelector("#section1");
+      //   section1.innerHTML = MovieList.formatMany(data);
+      // };
+
       V.rendersection1 = function (data) {
-        let section1 = document.querySelector("#section1");
-        section1.innerHTML = MovieList.formatMany(data);
-      };
+    let section1 = document.querySelector("#section1");
+    section1.innerHTML = "";
+
+    data.sort((a, b) => a.id_category - b.id_category);
+
+    let currentCat = null;
+    let filmsCat = [];
+
+    data.forEach(film => {
+        if (film.id_category !== currentCat) {
+            if (filmsCat.length > 0) {
+                section1.innerHTML += MovieList.formatMany(filmsCat, categories[currentCat]);
+            }
+            currentCat = film.id_category;
+            filmsCat = [];
+        }
+        filmsCat.push(film);
+    });
+
+    // Dernière catégorie
+    if (filmsCat.length > 0) {
+        section1.innerHTML += MovieList.formatMany(filmsCat, categories[currentCat]);
+    }
+};
+
+
+
+
 
       C.start(); // Démarre l'application
     </script>

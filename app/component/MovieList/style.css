@@ -25,9 +25,14 @@ body {
 }
 }
 .card{
+  flex: 0 0 22rem;
   position: relative;
   margin: 1rem;
   max-width: 25rem;
+  &&:hover {
+      transform: scale(1.05);
+      transition: ease-in-out 0.3s;
+    }
 }
 .card-bookmark{
   position: absolute;
@@ -100,4 +105,27 @@ button{
   align-items: center;
   flex-direction: column;
   gap: 0.5rem;
+}
+
+.cat-title {
+  font-size: 2rem;
+  margin: 2rem 0 1rem;
+  color: var(--color-fg);
+}
+
+.cat-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+
+  overflow-x: auto;
+
+  padding-bottom: 1rem;
+  scroll-behavior: smooth;
+
+  scrollbar-width: none; 
+}
+
+.cat-row::-webkit-scrollbar {
+  display: none; 
 }

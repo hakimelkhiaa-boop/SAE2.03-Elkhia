@@ -15,7 +15,7 @@ MovieList.format = function(film){
     return html;
 }
 
-MovieList.formatMany = function(data){
+MovieList.formatMany = function(data, titreCategorie){
     let html = template;
 
     let liste = "";
@@ -24,7 +24,11 @@ MovieList.formatMany = function(data){
     }
 
     html = html.replace("{{listeItems}}", liste);
+    html = html.replace("{{titreCategorie}}", titreCategorie);
+
     return html;
 }
+
+
 
 export {MovieList};
