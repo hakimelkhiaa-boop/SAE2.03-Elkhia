@@ -1,0 +1,56 @@
+button {
+  all: unset;
+}
+/* --- Boutons du menu admin (même style que le formulaire) --- */
+#menu-admin {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin: 30px 0;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 3rem;
+}
+
+#menu-admin button {
+  padding: 12px 20px;
+  background: #121212;          /* même fond que les inputs */
+  color: #ffffff;               /* texte blanc */       /* même bordure que les inputs */
+  border-radius: 8px;           /* même arrondi */
+  font-size: 1.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+#menu-admin button:hover {
+  background: #3a3a3a;          /* léger éclaircissement */
+  transform:scale(1.05);
+
+}
+ .logo {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--color-primary);
+    padding-right: 1.5rem;
+    cursor: pointer;
+  }
+  a {
+  color: inherit;       
+  text-decoration: none; 
+}
+.navbar__admin {
+    
+    --_bg-nav: #121212;
+    background-color: var(--_bg-nav);
+    font-size: 1.5rem;
+    padding: 0.5rem 3rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    &:hover {
+      --_bg-nav: rgba(255, 255, 255, 0.1);
+      transform: scale(1.05);
+      transition: ease-in-out 0.3s;
+    }
+  }

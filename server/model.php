@@ -48,3 +48,13 @@ function getMovieDetail($id) {
 
     return $stmt->fetch(PDO::FETCH_OBJ);
 }
+
+function getAllProfiles() {
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+
+    $sql = "SELECT * FROM SAE203_profiles";
+    $stmt = $cnx->prepare($sql);
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
+}

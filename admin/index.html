@@ -9,32 +9,65 @@
 </head>
 
 <body>
+  <header id="header">
+    <div id="menu-admin">
+      <article class="logo"><a href="../index.html">Badflix</a></article>
+      <div>
+        <button onclick="V.renderMovieForm()">Ajouter un film</button>
+        <button onclick="V.renderProfileForm()">Ajouter un profil</button>
+      </div>
+      <article class="navbar__admin" onclick="C.handlerAbout()">About</article>
+    </div>
+  </header>
   <section id="log"></section>
-  <section id="form"></section>
+  <section id="form">
+
+  </section>
 
   <script type="module">
     import { Log } from "./component/Log/script.js";
     import { MovieForm } from "./component/MovieForm/script.js";
     import { dataMovie } from "./data/dataMovie.js";
+    import { ProfileForm } from "./component/ProfileForm/script.js";
+    import { DataProfile } from "./data/dataProfile.js";
+
+    
+
 
     window.C = {};
 
-   C.handlerAjout = async function () {
+    C.handlerAjout = async function () {
 
-    let form = document.querySelector('.movie-form');
+      let form = document.querySelector('.movie-form');
 
-    let fd = new FormData(form);
+      let fd = new FormData(form);
 
-    let res = await dataMovie.addMovie(fd);
+      let res = await dataMovie.addMovie(fd);
 
-    V.renderLog(JSON.stringify(res));
-}
+      V.renderLog(JSON.stringify(res));
+    }
+
+    C.handlerAddProfile = async function () {
+      let form = document.querySelector("#profile-form");
+      let formData = new FormData(form);
+
+      let result = await DataProfile.add(formData);
+
+      Log.print(result.message);
+    }
+
+    C.handlerAbout = function () {
+      alert(
+        "Ceci est un projet pour la SAE2.03 édition 2026."
+      );
+    };
+
 
 
     C.start = function () {
       V.renderLog("Démarrage de l'application");
-      V.renderMovieForm();
-      
+
+
     };
 
     window.V = {};
@@ -52,6 +85,12 @@
       let formulaire = document.querySelector("#form");
       formulaire.innerHTML = MovieForm.format("C.handlerAjout()");
     }
+    V.renderProfileForm = function () {
+      let formulaire = document.querySelector("#form");
+      formulaire.innerHTML = ProfileForm.format("C.handlerAddProfile()");
+    }
+
+
     C.start();
   </script>
 </body>

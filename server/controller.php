@@ -71,11 +71,13 @@ function addMovieController() {
         "Comédie" => 2,
         "Drame" => 3,
         "Science-fiction" => 4,
-        "Horreur" => 5,
+        "Animation" => 5,
         "Thriller" => 6,
-        "Animation" => 7,
-        "Documentaire" => 8
-    ];
+        "Horreur" => 7,
+        "Aventure" => 8,
+        "Fantaisie" => 9,
+        "Documentaire" => 10
+            ];
 
     if (!isset($categories[$categoryTxt])) {
         return ["error" => "Catégorie inconnue"];
@@ -92,3 +94,8 @@ function addMovieController() {
 
     return ["success" => "Film ajouté avec succès !"];
 }
+
+function readProfiles() {
+    return getAllProfiles();
+}
+

@@ -1,143 +1,179 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <title>SAE2.03 APP</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/base.css" />
-  </head>
 
-  <body>
-    <header id="header"></header>
-    <section id="section0"></section>
-    <section id="section1"></section>
+<head>
+  <title>SAE2.03 APP</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./css/base.css" />
+</head>
 
-    <section id="app"></section>
+<body>
+  <header id="header"></header>
+  <section id="section0"></section>
+  <section id="section1"></section>
 
-    <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-      <symbol id="icon-movie" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-        <path d="M16.956 0H3.044A3.044 3.044 0 0 0 0 3.044v13.912A3.044 3.044 0 0 0 3.044 20h13.912A3.044 3.044 0 0 0 20 16.956V3.044A3.044 3.044 0 0 0 16.956 0ZM4 9H2V7h2v2Zm-2 2h2v2H2v-2Zm16-2h-2V7h2v2Zm-2 2h2v2h-2v-2Zm2-8.26V4h-2V2h1.26a.74.74 0 0 1 .74.74ZM2.74 2H4v2H2V2.74A.74.74 0 0 1 2.74 2ZM2 17.26V16h2v2H2.74a.74.74 0 0 1-.74-.74Zm16 0a.74.74 0 0 1-.74.74H16v-2h2v1.26Z" fill="currentColor"></path>
-      </symbol>
-      <symbol id="icon-bookmark2" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M10.9816 1L11 13L6 9L1 13V1.036L10.9816 1Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
-      </symbol>
-      <symbol id="icon-play" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-        <path d="M15 0C6.713 0 0 6.713 0 15c0 8.288 6.713 15 15 15 8.288 0 15-6.712 15-15 0-8.287-6.712-15-15-15Zm-3 21V8l9 6.5-9 6.5Z" fill="#FFF"></path>
-      </symbol>
-    </svg>
+  <section id="app"></section>
 
-    <script type="module">
-      import { NavBar } from "./component/NavBar/script.js";
-      import { MovieList } from "./component/MovieList/script.js";
-      import { DataMovie } from "./data/dataMovie.js";
-      import { MovieDetail } from "./component/MovieDetail/script.js";
+  <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden"
+    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <symbol id="icon-movie" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M16.956 0H3.044A3.044 3.044 0 0 0 0 3.044v13.912A3.044 3.044 0 0 0 3.044 20h13.912A3.044 3.044 0 0 0 20 16.956V3.044A3.044 3.044 0 0 0 16.956 0ZM4 9H2V7h2v2Zm-2 2h2v2H2v-2Zm16-2h-2V7h2v2Zm-2 2h2v2h-2v-2Zm2-8.26V4h-2V2h1.26a.74.74 0 0 1 .74.74ZM2.74 2H4v2H2V2.74A.74.74 0 0 1 2.74 2ZM2 17.26V16h2v2H2.74a.74.74 0 0 1-.74-.74Zm16 0a.74.74 0 0 1-.74.74H16v-2h2v1.26Z"
+        fill="currentColor"></path>
+    </symbol>
+    <symbol id="icon-bookmark2" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10.9816 1L11 13L6 9L1 13V1.036L10.9816 1Z" stroke="currentColor" stroke-width="1.5"
+        stroke-linejoin="round" />
+    </symbol>
+    <symbol id="icon-play" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M15 0C6.713 0 0 6.713 0 15c0 8.288 6.713 15 15 15 8.288 0 15-6.712 15-15 0-8.287-6.712-15-15-15Zm-3 21V8l9 6.5-9 6.5Z"
+        fill="#FFF"></path>
+    </symbol>
+  </svg>
 
-      const categories = {
-    1: "Action",
-    2: "Comédie",
-    3: "Drame",
-    4: "Science-fiction",
-    5: "Animation",
-    6: "thriller",
-    7: "Horreur",
-    8: "Aventure",
-    9: "Fantaisie",
-    10: "Documentaire"
-};
-      
-      // Controleur
-      // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
-      // Une fois l'application terminée, on pourrait remettre let C.
-      window.C = {};
-
-      C.handlerAbout = function () {
-        alert(
-          "Ceci est un projet pour la SAE2.03 édition 2026."
-        );
-      };
+  <script type="module">
+    import { NavBar } from "./component/NavBar/script.js";
+    import { MovieList } from "./component/MovieList/script.js";
+    import { DataMovie } from "./data/dataMovie.js";
+    import { MovieDetail } from "./component/MovieDetail/script.js";
+    import { DataProfile } from "./data/dataProfile.js";
+    import { ProfileCard } from "./component/ProfileCard/script.js";
 
 
 
-      C.handlerDetail = async function(id){
-          console.log("ID cliqué :", id);
-          let response = await fetch(`../server/script.php?todo=readMovieDetail&id=${id}`);
-          let film = await response.json();
-          console.log("Film reçu :", film);
-          if(film.error){
-              alert("Film introuvable");
-              return;
-          }
+    const categories = {
+      1: "Action",
+      2: "Comédie",
+      3: "Drame",
+      4: "Science-fiction",
+      5: "Animation",
+      6: "thriller",
+      7: "Horreur",
+      8: "Aventure",
+      9: "Fantaisie",
+      10: "Documentaire"
+    };
 
-          let html = MovieDetail.format(film);
-          console.log("HTML généré :", html);
-          document.querySelector("#section1").innerHTML = html;
-          window.scrollTo(0, 0); 
+    // Controleur
+    // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
+    // Une fois l'application terminée, on pourrait remettre let C.
+    window.C = {};
+
+    C.handlerAbout = function () {
+      alert(
+        "Ceci est un projet pour la SAE2.03 édition 2026."
+      );
+    };
+
+
+
+    C.handlerDetail = async function (id) {
+      console.log("ID cliqué :", id);
+      let response = await fetch(`../server/script.php?todo=readMovieDetail&id=${id}`);
+      let film = await response.json();
+      console.log("Film reçu :", film);
+      if (film.error) {
+        alert("Film introuvable");
+        return;
       }
 
-      C.start = async function () {
-        V.renderNavBar( "C.handlerHome()", "C.handlerAbout()" );
-        let data = await DataMovie.requestMovies();
-        V.rendersection1(data); // Affiche une section vide au démarrage, les films seront chargés ensuite
-      };
+      let html = MovieDetail.format(film);
+      console.log("HTML généré :", html);
+      document.querySelector("#section1").innerHTML = html;
+      window.scrollTo(0, 0);
+    }
+
+    C.selectProfile = function (id) {
+  window.activeProfile = id; // stocke le profil actif
+  C.handlerHome();           // recharge les films
+};
 
 
-      // Vue (contient tout ce qui est relatif à l'affichage)
-      window.V = {};
+    C.start = async function () {
+      V.renderNavBar("C.handlerHome()", "C.handlerAbout()");
+      // Étape 1 : lire les profils
+  // let profiles = await DataProfile.read();
 
-      /**
-       * V.renderNavBar
-       *
-       * Cette fonction est responsable de l'affichage de la barre de navigation (NavBar).
-       * Elle sélectionne l'élément HTML avec l'ID "header" et y insère le contenu
-       * formaté par le composant NavBar.
-       */
-      V.renderNavBar = function (hHome, hAbout) {
-        let header = document.querySelector("#header");
-        header.innerHTML = NavBar.format(hAbout, hHome);
-      };
+  // // Étape 2 : afficher la sélection de profils
+  // V.renderProfiles(profiles);
 
-      C.handlerHome = async function () {
-        let data = await DataMovie.requestMovies();
-        V.rendersection1(data);
-      };
+      let data = await DataMovie.requestMovies();
+      V.rendersection1(data); // Affiche une section vide au démarrage, les films seront chargés ensuite
+    };
 
-      // V.rendersection1 = function (data) {
-      //   let section1 = document.querySelector("#section1");
-      //   section1.innerHTML = MovieList.formatMany(data);
-      // };
 
-      V.rendersection1 = function (data) {
-    let section1 = document.querySelector("#section1");
-    section1.innerHTML = "";
+    // Vue (contient tout ce qui est relatif à l'affichage)
+    window.V = {};
 
-    data.sort((a, b) => a.id_category - b.id_category);
+    /**
+     * V.renderNavBar
+     *
+     * Cette fonction est responsable de l'affichage de la barre de navigation (NavBar).
+     * Elle sélectionne l'élément HTML avec l'ID "header" et y insère le contenu
+     * formaté par le composant NavBar.
+     */
+    V.renderNavBar = function (hHome, hAbout) {
+      let header = document.querySelector("#header");
+      header.innerHTML = NavBar.format(hAbout, hHome);
+    };
 
-    let currentCat = null;
-    let filmsCat = [];
+    C.handlerHome = async function () {
+      let data = await DataMovie.requestMovies();
+      V.rendersection1(data);
+    };
 
-    data.forEach(film => {
+    V.rendersection1 = function (data) {
+      let section1 = document.querySelector("#section1");
+      section1.innerHTML = MovieList.formatMany(data);
+    };
+
+    V.rendersection1 = function (data) {
+      let section1 = document.querySelector("#section1");
+      section1.innerHTML = "";
+
+      data.sort((a, b) => a.id_category - b.id_category);
+
+      let currentCat = null;
+      let filmsCat = [];
+
+      data.forEach(film => {
         if (film.id_category !== currentCat) {
-            if (filmsCat.length > 0) {
-                section1.innerHTML += MovieList.formatMany(filmsCat, categories[currentCat]);
-            }
-            currentCat = film.id_category;
-            filmsCat = [];
+          if (filmsCat.length > 0) {
+            section1.innerHTML += MovieList.formatMany(filmsCat, categories[currentCat]);
+          }
+          currentCat = film.id_category;
+          filmsCat = [];
         }
         filmsCat.push(film);
-    });
+      });
 
-    // Dernière catégorie
-    if (filmsCat.length > 0) {
+      // Dernière catégorie
+      if (filmsCat.length > 0) {
         section1.innerHTML += MovieList.formatMany(filmsCat, categories[currentCat]);
-    }
+      }
+    };
+
+
+    V.renderProfiles = function (list) {
+  let html = `
+    <h2 class="choose-title">Choisissez un profil</h2>
+    <div class="profile-list">
+  `;
+
+  list.forEach(p => html += ProfileCard.format(p));
+
+  html += "</div>";
+
+  document.querySelector("#app").innerHTML = html;
 };
 
 
 
+    C.start(); // Démarre l'application
+  </script>
+</body>
 
-
-      C.start(); // Démarre l'application
-    </script>
-  </body>
 </html>
 <script type="module"></script>
