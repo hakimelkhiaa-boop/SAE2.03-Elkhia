@@ -26,6 +26,14 @@ function getAllMovies(){
     return $stmt->fetchAll(PDO::FETCH_OBJ);
 }
 
+function getAllProfiles() {
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    $sql = "SELECT id, name, image FROM Users";
+    $stmt = $cnx->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
+}
+
 function addMovie($name, $director, $year, $length, $description, $id_category, $image, $trailer, $min_age){
     try {
         $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
@@ -49,12 +57,25 @@ function getMovieDetail($id) {
     return $stmt->fetch(PDO::FETCH_OBJ);
 }
 
-function getAllProfiles() {
-    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+function addProfile() {
+    try {
+        $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
 
-    $sql = "SELECT * FROM SAE203_profiles";
-    $stmt = $cnx->prepare($sql);
-    $stmt->execute();
+        // Vérification des champs obligatoires
+        if (!isset($_POST['name']) || !isset($_POST['age'])) {
+            return ["error" => "Champs manquants"];
+        }
 
-    return $stmt->fetchAll(PDO::FETCH_OBJ);
+        $name = $_POST['name'];
+        $image = $_POST['avatar'] ?? null; //input dans le form = avatar
+        $age = $_POST['age'];
+
+        $sql = "INSERT INTO Users (name, image, age) VALUES (?, ?, ?)";
+        $stmt = $cnx->prepare($sql);
+        $stmt->execute([$name, $image, $age]);
+
+        return ["message" => "Profil ajouté avec succès"];
+    } catch (Exception $e) {
+        return ["error" => "Erreur SQL : " . $e->getMessage()];
+    }
 }

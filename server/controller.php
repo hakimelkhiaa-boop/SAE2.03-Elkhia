@@ -28,6 +28,14 @@ function readMoviesController(){
     }
 }
 
+function readProfiles() {
+    try {
+        return getAllProfiles();
+    } catch (Exception $e) {
+        return false;
+    }
+}
+
 function readMovieDetail() {
     if (!isset($_GET['id'])) {
         return ["error" => "ID manquant"];
@@ -95,7 +103,7 @@ function addMovieController() {
     return ["success" => "Film ajouté avec succès !"];
 }
 
-function readProfiles() {
-    return getAllProfiles();
-}
 
+function addProfileController() {
+    return addProfile(); // ou le nom de ta fonction modèle
+}

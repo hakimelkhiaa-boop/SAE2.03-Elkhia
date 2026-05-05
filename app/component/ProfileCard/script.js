@@ -6,7 +6,7 @@ let ProfileCard = {};
 ProfileCard.format = function (profile) {
     return template
         .replace("{{id}}", profile.id)
-        .replace("{{avatar}}", profile.avatar || "default.png")
+        .replace("{{image}}", profile.image || "default.png")
         .replace("{{name}}", profile.name);
 };
 

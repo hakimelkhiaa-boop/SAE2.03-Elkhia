@@ -10,7 +10,7 @@
   align-items: center;
   padding: 1rem 3rem;
   color: var(--color-fg);
-  background-color: var(--color-bg);
+  background-color: #121212;
   font-size: 1.5rem;
 
   .navbar__list {
@@ -28,7 +28,7 @@
   }
   .navbar__item {
     
-    --_bg-nav: var(--color-bg);
+    --_bg-nav: #121212;
     background-color: var(--_bg-nav);
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;

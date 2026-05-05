@@ -69,6 +69,7 @@
 
 
 
+
     C.handlerDetail = async function (id) {
       console.log("ID cliqué :", id);
       let response = await fetch(`../server/script.php?todo=readMovieDetail&id=${id}`);
@@ -86,22 +87,25 @@
     }
 
     C.selectProfile = function (id) {
-  window.activeProfile = id; // stocke le profil actif
-  C.handlerHome();           // recharge les films
-};
+      window.activeProfile = id; // stocke le profil actif
+      C.handlerHome();           // recharge les films
+    };
+    C.selectProfile = function (id) {
+      window.activeProfile = id;   // on stocke le profil actif
+      C.handlerHome();             // on recharge les films
+    };
 
 
     C.start = async function () {
-      V.renderNavBar("C.handlerHome()", "C.handlerAbout()");
-      // Étape 1 : lire les profils
-  // let profiles = await DataProfile.read();
+      V.renderNavBar("C.handlerHome()", "C.handlerAbout()", "C.handlerProfiles()");
 
-  // // Étape 2 : afficher la sélection de profils
-  // V.renderProfiles(profiles);
+      // Lire les profils
+      let profiles = await DataProfile.read();
 
-      let data = await DataMovie.requestMovies();
-      V.rendersection1(data); // Affiche une section vide au démarrage, les films seront chargés ensuite
+      // Afficher la sélection
+      V.renderProfiles(profiles);
     };
+
 
 
     // Vue (contient tout ce qui est relatif à l'affichage)
@@ -114,14 +118,21 @@
      * Elle sélectionne l'élément HTML avec l'ID "header" et y insère le contenu
      * formaté par le composant NavBar.
      */
-    V.renderNavBar = function (hHome, hAbout) {
+    V.renderNavBar = function (hHome, hAbout, hProfiles) {
       let header = document.querySelector("#header");
-      header.innerHTML = NavBar.format(hAbout, hHome);
+      header.innerHTML = NavBar.format(hAbout, hHome, hProfiles);
     };
 
     C.handlerHome = async function () {
       let data = await DataMovie.requestMovies();
       V.rendersection1(data);
+    };
+
+    C.handlerProfiles = async function () {
+      let profiles = await DataProfile.read();
+      V.renderProfiles(profiles);
+      document.querySelector("#section1").innerHTML = "";
+      document.querySelector("#section0").innerHTML = "";
     };
 
     V.rendersection1 = function (data) {
@@ -157,17 +168,18 @@
 
 
     V.renderProfiles = function (list) {
-  let html = `
-    <h2 class="choose-title">Choisissez un profil</h2>
-    <div class="profile-list">
-  `;
+      let html = `
+        <h2 class="choose-title">Choisissez un profil</h2>
+        <div class="profile-list">
+    `;
 
-  list.forEach(p => html += ProfileCard.format(p));
+      list.forEach(p => html += ProfileCard.format(p));
 
-  html += "</div>";
+      html += "</div>";
 
-  document.querySelector("#app").innerHTML = html;
-};
+      document.querySelector("#app").innerHTML = html;
+    };
+
 
 
 
