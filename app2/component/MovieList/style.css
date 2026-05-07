@@ -2,7 +2,7 @@
   --color-bg: #000000;       /* fond noir pur */
   --color-fg: #ffffff;       /* texte blanc */
   --color-muted: #b3b7c5;    /* gris clair */
-  --color-accent: #F5C518;   /* jaune Pluto TV */
+  --color-accent: #F5C518;   /* jaune */
 }
 
 /* ============================
@@ -160,7 +160,7 @@ button {
 }
 
 /* ============================
-   LIGNES DE FILMS (carrousels)
+   LIGNES DE FILMS
 ============================ */
 .cat-row {
   display: flex;

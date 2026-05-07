@@ -73,8 +73,6 @@ function addProfile($name, $image, $age) {
         $sql = "INSERT INTO Users (name, image, age) VALUES (?, ?, ?)";
         $stmt = $cnx->prepare($sql);
         return $stmt->execute([$name, $image, $age]);
-
-        return ["message" => "Profil ajouté avec succès"];
     } catch (Exception $e) {
         return ["error" => "Erreur SQL : " . $e->getMessage()];
     }

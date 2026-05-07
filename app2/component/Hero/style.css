@@ -1,5 +1,7 @@
 /* ===================
-   HERO 
+   HERO (\(\
+        (-.-)
+        o_(")(")
 =================== */
 .hero {
   position: relative;
@@ -9,7 +11,7 @@
   font-family: var(--ff-sans);
 }
 
-/* Image full width */
+/* Image  */
 .hero-image img {
   position: absolute;
   top: 0;
@@ -19,7 +21,7 @@
   object-fit: cover;
 }
 
-/* Dégradé sombre pour lisibilité */
+/* Dégradé sombre */
 .hero::after {
   content: "";
   position: absolute;
@@ -34,7 +36,7 @@
   );
 }
 
-/* Texte par-dessus l'image */
+/* Texte par dessus l'image */
 .hero-content {
   position: absolute;
   bottom: 15%;
@@ -82,7 +84,7 @@
   background: #ffdd4a;
 }
 
-/* Bouton secondaire transparent */
+/* Bouton secondaire */
 .hero-btn-secondary {
   background: rgba(255,255,255,0.1);
   color: white;
