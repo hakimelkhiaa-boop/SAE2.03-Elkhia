@@ -1,0 +1,124 @@
+/* ============================
+   MOVIE DETAIL — LAYOUT 3 COLONNES
+============================ */
+.detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr 32rem; /* 2 colonnes pour trailer+texte, 1 pour image */
+  grid-template-rows: auto auto;        /* ligne 1 = trailer, ligne 2 = texte */
+  gap: 2rem;
+  padding: 3rem 4rem;
+  background: #000;
+  color: #fff;
+  align-items: start;
+  font-family: var(--ff-sans);
+}
+
+/* ============================
+   TRAILER (ligne 1, colonnes 1-2)
+============================ */
+.detail__trailer {
+  grid-column: 1 / 3; /* colonne 1 → 2 */
+  grid-row: 1 / 2;
+}
+
+.detail__trailer iframe {
+  width: 100%;
+  height: 22rem;
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+}
+
+/* ============================
+   IMAGE (colonne 3, sur 2 lignes)
+============================ */
+.card__upper {
+  grid-column: 3 / 4;
+  grid-row: 1 / 3; /* occupe toute la hauteur */
+  position: relative;
+}
+
+.detail__image img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.6);
+}
+
+/* ============================
+   TEXTE (ligne 2, colonnes 1-2)
+============================ */
+.detail__content {
+  grid-column: 1 / 3; /* colonne 1 → 2 */
+  grid-row: 2 / 3;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  max-width: 100%;
+}
+
+/* TITRE */
+.detail__title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0;
+}
+
+/* DESCRIPTION */
+.detail__description {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #d0d0d0;
+  margin: 0;
+}
+
+/* INFO LIST */
+.detail__info {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 1rem;
+  color: #d0d0d0;
+}
+
+.detail__info li {
+  margin-bottom: .4rem;
+}
+
+.detail__info strong {
+  color: #fff;
+}
+
+/* ============================
+   BOUTONS PLAY + BOOKMARK
+============================ */
+button { all: unset; }
+
+
+.btn-play .icon {
+  width: 1.4rem;
+  height: 1.4rem;
+  fill: #F5C518;
+}
+
+.btn-play .play {
+  color: #F5C518;
+  font-weight: 600;
+}
+
+.card-bookmark {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(0,0,0,0.55);
+  padding: .5rem;
+  border-radius: 50%;
+}
+
+.card-bookmark .icon--bookmark {
+  width: 1.4rem;
+  height: 1.4rem;
+  color: white;
+}
+

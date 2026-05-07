@@ -28,7 +28,7 @@ function getAllMovies(){
 
 function getAllProfiles() {
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-    $sql = "SELECT id, name, image FROM Users";
+    $sql = "SELECT id, name, image, age FROM Users";
     $stmt = $cnx->prepare($sql);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -57,7 +57,7 @@ function getMovieDetail($id) {
     return $stmt->fetch(PDO::FETCH_OBJ);
 }
 
-function addProfile() {
+function addProfile($name, $image, $age) {
     try {
         $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
 
@@ -72,7 +72,7 @@ function addProfile() {
 
         $sql = "INSERT INTO Users (name, image, age) VALUES (?, ?, ?)";
         $stmt = $cnx->prepare($sql);
-        $stmt->execute([$name, $image, $age]);
+        return $stmt->execute([$name, $image, $age]);
 
         return ["message" => "Profil ajouté avec succès"];
     } catch (Exception $e) {

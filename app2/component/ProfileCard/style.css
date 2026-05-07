@@ -1,0 +1,65 @@
+.choose-title {
+  text-align: center;
+  color: white;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+/* Liste des profils */
+.profile-list {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* ============================
+   PROFILE CARD 
+============================ */
+.profile-card {
+  width: 150px;
+  background: #0d0d0d; 
+  padding: 1rem;
+  border-radius: 14px;
+  text-align: center;
+  cursor: pointer;
+  font-family: var(--ff-sans);
+
+  /* Bordure jaune */
+  border: 2px solid rgba(245, 197, 24, 0.25);
+
+  transition: transform .25s ease, 
+              box-shadow .25s ease, 
+              border-color .25s ease,
+              background .25s ease;
+}
+
+.profile-card:hover {
+  transform: scale(1.08);
+
+  /* Glow jaune*/
+  border-color: #F5C518;
+  box-shadow: 0 0 18px rgba(245, 197, 24, 0.45);
+
+  background: #141414;
+}
+
+/* Avatar */
+.profile-avatar {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  
+  margin-bottom: 12px;
+}
+
+/* Nom */
+.profile-card p {
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+}

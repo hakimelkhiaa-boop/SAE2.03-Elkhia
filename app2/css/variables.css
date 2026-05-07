@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+:root {
+  /* Primitive Tokens */
+  --color-black: hsl(253, 69%, 8%);
+  --color-white: hsl(0, 0%, 100%);
+  --color-gray-light: hsl(0, 0%, 80%);
+  --color-gray: hsl(0, 0%, 50%);
+  --color-gray-dark: hsl(0, 0%, 20%);
+  --ff-sans: "Nunito", sans-serif;
+
+  /* Sementic Tokens */
+  --color-fg: var(--color-white);
+  --color-bg: var(--color-gray-dark);
+}

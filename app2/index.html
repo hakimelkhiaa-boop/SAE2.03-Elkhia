@@ -10,6 +10,7 @@
 
 <body>
   <header id="header"></header>
+  <section id="hero"></section>
   <section id="section1"></section>
 
   <section id="app"></section>
@@ -39,7 +40,7 @@
     import { MovieDetail } from "./component/MovieDetail/script.js";
     import { DataProfile } from "./data/dataProfile.js";
     import { ProfileCard } from "./component/ProfileCard/script.js";
-
+    import { Hero } from "./component/Hero/script.js";
 
 
     const categories = {
@@ -66,8 +67,7 @@
       );
     };
 
-
-
+    
 
     C.handlerDetail = async function (id) {
       console.log("ID cliqué :", id);
@@ -83,6 +83,7 @@
       console.log("HTML généré :", html);
       document.querySelector("#section1").innerHTML = html;
       window.scrollTo(0, 0);
+      document.querySelector("#hero").innerHTML = "";
     }
 
     C.selectProfile = function (id) {
@@ -103,6 +104,7 @@
 
       // Afficher la sélection
       V.renderProfiles(profiles);
+
     };
 
 
@@ -122,16 +124,35 @@
       header.innerHTML = NavBar.format(hAbout, hHome, hProfiles);
     };
 
-    C.handlerHome = async function () {
-      let data = await DataMovie.requestMovies();
-      V.rendersection1(data);
+    V.renderHero = function (hShow) {
+      let hero = document.querySelector("#hero");
+      hero.innerHTML = Hero.format(hShow);
     };
+   C.handlerHome = async function () {
+
+  if (!window.activeProfile) {
+    document.querySelector("#hero").innerHTML = "";
+    document.querySelector("#section1").innerHTML = "";
+    return;
+  }
+
+  // HERO avec Pirates des Caraïbes (id = 1)
+  V.renderHero(120);
+
+  let data = await DataMovie.requestMovies();
+  V.rendersection1(data);
+};
+
+
 
     C.handlerProfiles = async function () {
-      let profiles = await DataProfile.read();
-      V.renderProfiles(profiles);
-      document.querySelector("#section1").innerHTML = "";
-    };
+  document.querySelector("#hero").innerHTML = "";     
+  document.querySelector("#section1").innerHTML = "";  
+
+  let profiles = await DataProfile.read();
+  V.renderProfiles(profiles);                          
+};
+
 
     V.rendersection1 = function (data) {
       let section1 = document.querySelector("#section1");
@@ -175,7 +196,7 @@
 
       html += "</div>";
 
-      document.querySelector("#app").innerHTML = html;
+      document.querySelector("#section1").innerHTML = html;
     };
 
 

@@ -1,0 +1,189 @@
+:root {
+  --color-bg: #000000;       /* fond noir pur */
+  --color-fg: #ffffff;       /* texte blanc */
+  --color-muted: #b3b7c5;    /* gris clair */
+  --color-accent: #F5C518;   /* jaune Pluto TV */
+}
+
+/* ============================
+   GLOBAL
+============================ */
+body {
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  margin: 0;
+  font-family: var(--ff-sans);
+}
+
+
+/* ============================
+   ICONES
+============================ */
+.icon {
+  width: 2rem;
+  height: 2rem;
+  color: currentColor;
+}
+
+.icon--logo {
+  width: 4rem;
+  height: 4rem;
+}
+
+.icon--bookmark {
+  width: 1.4rem;
+  height: 1.4rem;
+  color: white;
+}
+
+/* ============================
+   CARDS DES FILMS
+============================ */
+.card {
+  flex: 0 0 18rem;
+  background: #111;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+
+  /* Glow jaune */
+  border-color: #F5C518;
+  box-shadow: 0 0 22px rgb(245, 197, 24);
+}
+
+/* Bookmark */
+.card-bookmark {
+  position: absolute;
+  top: .7rem;
+  right: .7rem;
+  background: rgba(0,0,0,0.55);
+  padding: .4rem;
+  border-radius: 50%;
+  transition: background .2s ease;
+}
+
+.card-bookmark:hover {
+  background: rgba(0,0,0,0.75);
+}
+
+/* Image */
+.card__image {
+  width: 100%;
+  height: 26rem;
+  overflow: hidden;
+}
+
+.card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ============================
+   BOUTON PLAY
+============================ */
+button {
+  all: unset;
+}
+
+.btn-play {
+  position: absolute;
+  bottom: 10rem;
+  right: 6rem;
+  background: rgba(0,0,0,0.55);
+  padding: .4rem .8rem;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+
+.card:hover .btn-play {
+  opacity: 1;
+}
+
+.btn-play-container {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.btn-play .icon {
+  width: 1.2rem;
+  height: 1.2rem;
+  fill: var(--color-accent);
+}
+
+.btn-play .play {
+  color: var(--color-accent);
+  font-size: .9rem;
+  font-weight: 600;
+}
+
+/* ============================
+   TITRE DES FILMS
+============================ */
+.grid-text {
+  padding: .8rem .4rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  text-align: left;
+}
+
+/* ============================
+   TITRES DE CATÉGORIES
+============================ */
+.cat-title {
+  display: flex;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 1rem 0;
+  color: white;
+  padding-left: .3rem;
+}
+
+.divider-0-2-269 {
+  height: 2px;
+  flex-grow: 1;
+  align-self:center ;
+  background-color: #A8A8A8;
+  margin-left: 1rem;
+}
+
+/* ============================
+   LIGNES DE FILMS (carrousels)
+============================ */
+.cat-row {
+  display: flex;
+  gap: 1.2rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 1.5rem;
+  scrollbar-width: thin; 
+}
+
+
+.cat-row {
+  scrollbar-width: thin;
+  scrollbar-color: #F5C518 #111;
+}
+
+
+
+/* ============================
+   CONTAINER GLOBAL
+============================ */
+.container {
+  width: 100%;
+  margin: 1.5rem 2rem;
+  margin-bottom: 2rem;
+}

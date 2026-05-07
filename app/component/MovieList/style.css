@@ -116,20 +116,14 @@ button{
 
 .cat-row {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  justify-content: center;
+  gap: 1.2rem;
   overflow-x: auto;
-
-  padding-bottom: 1rem;
-  scroll-behavior: smooth;
-
-  scrollbar-width: none; 
+  padding-bottom: .5rem;
+  scrollbar-width: thin;
+  overflow-y: hidden;
+  overflow-x: auto;
 }
 
-.cat-row::-webkit-scrollbar {
-  display: none; 
-}
 .container {
   display: flex;
   padding: 0 3rem;
